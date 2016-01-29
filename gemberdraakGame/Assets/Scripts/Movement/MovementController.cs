@@ -7,31 +7,25 @@ public class MovementController : MonoBehaviour {
 	public float gravity = 9.87f;
 	public float jumpSpeed;
 	public float acceleration = 8;
-
-	Vector3 velocity;
-
 	public string ctrlName = "CTRL1_";
 
+	public GameObject body;
 
-	private float verticalSpeed;
+	Vector3 velocity;
+	float verticalSpeed;
+	float zSpeed;
+	float xSpeed;
 
-	float upSpeed;
-	float horizontalSpeed;
-
-	// Use this for initialization
 	void Start () {
 		velocity = Vector3.zero;
 	}
 
-	// Update is called once per frame
 	void Update () {
-		upSpeed = AccelerateTowards (upSpeed, acceleration, Input.GetAxis (ctrlName + "vertical") * movementSpeed);
-		horizontalSpeed = AccelerateTowards (horizontalSpeed, acceleration, Input.GetAxis (ctrlName + "horizontal") * movementSpeed);
+		zSpeed = AccelerateTowards (zSpeed, acceleration, Input.GetAxis (ctrlName + "vertical") * movementSpeed);
+		xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis (ctrlName + "horizontal") * movementSpeed);
 
-		Vector3 direction = new Vector3(horizontalSpeed,0,upSpeed);
-
-		velocity = direction;
-
+		velocity = new Vector3(xSpeed,0,zSpeed);
+		Vector3 dir = new Vector3 (xSpeed, 0, zSpeed);
 
 		CharacterController controller = gameObject.GetComponent<CharacterController> ();
 		if (controller.isGrounded) {
@@ -40,9 +34,13 @@ public class MovementController : MonoBehaviour {
 				verticalSpeed = jumpSpeed;
 			}
 		} 
-
 		verticalSpeed -= gravity * Time.deltaTime;
 		velocity.y = verticalSpeed;
+
+		if (velocity.magnitude > 1) {
+			SetLookRotation (dir);
+		}
+
 		controller.Move (velocity * Time.deltaTime);
 	}
 
@@ -52,11 +50,15 @@ public class MovementController : MonoBehaviour {
 		} else {
 			float dir = Mathf.Sign (targetSpeed - speed);	
 			speed += acceleration * Time.deltaTime * dir;
-			//if (Mathf.Sign (targetSpeed) != Mathf.Sign(speed)) {
-			//	return 0;
-			//} else {
-				return (dir == Mathf.Sign (targetSpeed - speed)) ? speed : targetSpeed;
-			//}
+			return (dir == Mathf.Sign (targetSpeed - speed)) ? speed : targetSpeed;
+		}
+	}
+
+	void SetLookRotation(Vector3 target){
+		Debug.Log(target.normalized);
+		target.y = 0;
+		if (target.normalized != Vector3.zero) {
+			body.transform.rotation = Quaternion.LookRotation (target.normalized, Vector3.down);
 		}
 	}
 }
