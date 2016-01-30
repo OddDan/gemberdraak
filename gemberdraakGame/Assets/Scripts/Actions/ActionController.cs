@@ -14,7 +14,7 @@ public class ActionController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown(mc.ctrlName + "jump")) {
+		if (Input.GetButtonDown(mc.ctrlName + "jump") && mc.type == charType.PRIEST) {
 			if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 				lastFireTime = Time.realtimeSinceStartup;
 				Vector3 rotation = mc.velocity;
