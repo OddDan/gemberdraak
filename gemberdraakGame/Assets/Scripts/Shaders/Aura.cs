@@ -19,13 +19,14 @@ public class Aura : MonoBehaviour
 		Debug.Log("Height: " + material.GetFloat("_Height"));
 		Debug.Log("Opacity: " + material.GetFloat("_Opacity"));
 		//if (Input.GetKeyDown(KeyCode.Space))
-		//{
+		{
 		//		AuraBurst(1f);
-		//}
+		}
 	}
 
 	public void AuraBurst (float time)
 	{
+		StopAllCoroutines ();
 		StartCoroutine (AuraBurstCoroutine (time));
 	}
 
