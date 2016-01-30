@@ -139,7 +139,9 @@ public class MovementController : MonoBehaviour {
 
 			if (controller.isGrounded) {
 				carrying = false;
-				SetState (charState.MOVEMENT);
+				if (state != charState.FLEEING) {
+					SetState (charState.MOVEMENT);
+				}
 			}
 
 			break;
