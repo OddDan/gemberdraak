@@ -28,4 +28,5 @@ public class GameManager : MonoBehaviour {
 		}
 		players[Random.Range (0, players.Length)].gameObject.GetComponent<MovementController>().Mutate(1);
 	}
+
 }
