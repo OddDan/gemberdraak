@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 6c32bd8c4a0a44d4cbeee99205ac1b6b
-timeCreated: 1454165813
-licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -59,7 +57,6 @@ ModelImporter:
     7400000: Idle
     7400002: running
     9500000: //RootNode
-    11100000: //RootNode
     13700000: polySurface16
   materials:
     importMaterials: 1
@@ -75,7 +72,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
