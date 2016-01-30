@@ -207,7 +207,7 @@ public class MovementController : MonoBehaviour {
 		}
 
 		// Out of bounds
-		Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
+		// Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
 		if(type == charType.SHEEP){
 			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
 		}else{
