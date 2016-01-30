@@ -13,6 +13,8 @@ public class MovementController : MonoBehaviour {
 	public charType type = charType.PRIEST;
 
 	public GameObject body;
+	public GameObject priestModel;
+	public GameObject sheepModel;
 
 	public Vector3 velocity;
 	float verticalSpeed;
@@ -25,6 +27,16 @@ public class MovementController : MonoBehaviour {
 	}
 
 	void Update () {
+		if (type == charType.PRIEST) {
+			priestModel.SetActive (true);
+			sheepModel.SetActive (false);
+			body = priestModel;
+		}
+		if (type == charType.SHEEP) {
+			priestModel.SetActive (false);
+			sheepModel.SetActive (true);
+			body = sheepModel;
+		}
 		if (canMove) {
 			zSpeed = AccelerateTowards (zSpeed, acceleration, Input.GetAxis (ctrlName + "vertical") * movementSpeed);
 			xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis (ctrlName + "horizontal") * movementSpeed);
@@ -74,7 +86,7 @@ public class MovementController : MonoBehaviour {
 	void SetLookRotation(Vector3 target){
 		target.y = 0;
 		if (target.normalized != Vector3.zero) {
-			body.transform.rotation = Quaternion.LookRotation (target.normalized, Vector3.down);
+			body.transform.rotation = Quaternion.LookRotation (target.normalized, Vector3.up);
 		}
 	}
 }
