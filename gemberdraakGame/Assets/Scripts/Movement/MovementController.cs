@@ -188,6 +188,14 @@ public class MovementController : MonoBehaviour {
 		default:
 			break;
 		}
+
+		// Out of bounds
+		Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
+		if(type == charType.SHEEP){
+			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
+		}else{
+			gameObject.layer = LayerMask.NameToLayer("BlockedByInvis");
+		}
 	}
 
 	public void SetState(charState newState){
@@ -205,7 +213,7 @@ public class MovementController : MonoBehaviour {
 	}
 
 	public Vector3 GetSpawnPoint(){
-		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 35);
+		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 25);
 		return v;
 	}
 
