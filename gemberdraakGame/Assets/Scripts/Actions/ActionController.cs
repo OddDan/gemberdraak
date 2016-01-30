@@ -46,17 +46,20 @@ public class ActionController : MonoBehaviour {
 						if (hit.collider.gameObject.tag == "Player") {
 							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
 								pickup.Play ();
+								mc.anim.SetBool ("Carrying", true);
 								mc.connectedPlayer = hit.collider.gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
 								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
 								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
+								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Carrying", true);
 								mc.carrying = true;
 							}
 						}
 					}
 				} else {
 					throwing.Play ();
+					mc.anim.SetBool ("Carrying", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
 					mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;

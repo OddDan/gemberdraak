@@ -119,6 +119,7 @@ public class MovementController : MonoBehaviour {
 			if (controller.isGrounded) {
 				verticalSpeed = 0;
 				if (Input.GetButtonDown ("CTRL" + playerID + "_jump") && type == charType.SHEEP) {
+					anim.SetTrigger ("Jump");
 					verticalSpeed = jumpSpeed;
 				}
 			} 
@@ -149,6 +150,7 @@ public class MovementController : MonoBehaviour {
 				carrying = false;
 				if (state != charState.FLEEING) {
 					SetState (charState.MOVEMENT);
+					anim.SetBool ("Carrying", false);
 					anim.SetBool ("Movement", true);
 				}
 			}
@@ -195,6 +197,8 @@ public class MovementController : MonoBehaviour {
 				anim.SetBool ("Movement", true);
 			} 
 			if (carrying) {
+				anim.SetBool ("Carrying", false);
+				carrying = false;
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
 			}
 			break;
