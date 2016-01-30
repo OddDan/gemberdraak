@@ -200,7 +200,7 @@ public class MovementController : MonoBehaviour {
 	}
 
 	public Vector3 GetSpawnPoint(){
-		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 50);
+		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 40);
 		return v;
 	}
 
