@@ -1,27 +1,20 @@
 fileFormatVersion: 2
-guid: b9cd3827d487e2c409285a27db429f90
-timeCreated: 1454109211
+<<<<<<< HEAD
+guid: c45f612aa2267d244bec99f3abad9d41
+timeCreated: 1454178388
+=======
+guid: 28110ef4a6f1a7944a80d5259221392b
+timeCreated: 1454181119
+>>>>>>> 6b086793136324becd2165a78e61ea14257578fd
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Candle_Half
-    100002: Candle_New
-    100004: Candle_Old
-    100006: //RootNode
-    400000: Candle_Half
-    400002: Candle_New
-    400004: Candle_Old
-    400006: //RootNode
-    2300000: Candle_Half
-    2300002: Candle_New
-    2300004: Candle_Old
-    3300000: Candle_Half
-    3300002: Candle_New
-    3300004: Candle_Old
-    4300000: Candle_Old
-    4300002: Candle_Half
-    4300004: Candle_New
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,7 +39,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 200
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
