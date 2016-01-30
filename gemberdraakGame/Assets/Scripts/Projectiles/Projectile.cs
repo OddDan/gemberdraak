@@ -20,7 +20,8 @@ public class Projectile : MonoBehaviour {
 		Debug.Log (other.gameObject.tag);
 		if (other.gameObject.tag == "Player") {
 			if (other.gameObject.GetComponent<MovementController>() != mc) {
-				other.gameObject.GetComponent<MovementController> ().SetStun ();
+				other.gameObject.GetComponent<MovementController> ().SetState(charState.STUNNED);
+				other.gameObject.GetComponent<MovementController> ().stuntime = 0;
 				Destroy (gameObject);
 			}
 		}
