@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6b125de604ebe8148bcba8692a531b96
+timeCreated: 1454114346
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - body: {instanceID: 0}
+  - priestModel: {fileID: 105906, guid: 9b44a73912a499c4aadd47cce7896149, type: 2}
+  - sheepModel: {fileID: 168226, guid: 31fb007a14bdc50429ffbb99007e4960, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
