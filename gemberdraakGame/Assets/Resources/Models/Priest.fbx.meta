@@ -100,6 +100,8 @@ ModelImporter:
     7400002: Priest_Rig|Priest_Run
     7400004: Priest_Rig|PriestAction
     7400006: Priest|PriestAction
+    7400008: Priest_Rig|Priest_Run.001
+    7400010: Priest_Rig|Priest_Walk
     9500000: //RootNode
     13700000: Priest
   materials:
