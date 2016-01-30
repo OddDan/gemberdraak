@@ -139,7 +139,9 @@ public class MovementController : MonoBehaviour {
 
 			if (controller.isGrounded) {
 				carrying = false;
-				SetState (charState.MOVEMENT);
+				if (state != charState.FLEEING) {
+					SetState (charState.MOVEMENT);
+				}
 			}
 
 			break;
@@ -155,19 +157,22 @@ public class MovementController : MonoBehaviour {
 			verticalSpeed -= gravity * Time.deltaTime;
 			velocity.y = verticalSpeed;
 			controller.Move (velocity * Time.deltaTime);
-			if (Vector3.Distance (transform.position, Vector3.zero) > 50) {
+			if (Vector3.Distance (transform.position, Vector3.zero) > 35) {
 				Mutate (0);
 				Respawn ();
 			}
 
 			break;
 		case charState.ENTERING:
-			velocity = (transform.position*-1)*(15*Time.deltaTime);
+			velocity = (transform.position * -1) * (15 * Time.deltaTime);
+			lastLookDir = velocity.normalized;
 			verticalSpeed -= gravity * Time.deltaTime;
 			velocity.y = verticalSpeed;
 			controller.Move (velocity * Time.deltaTime);
-			SetLookRotation (velocity);
-			if (Vector3.Distance (transform.position, Vector3.zero) < 28) {
+			SetLookRotation (lastLookDir);
+			if (Vector3.Distance (transform.position, Vector3.zero) < 25) {
+				xSpeed = 0;
+				zSpeed = 0;
 				SetState (charState.MOVEMENT);
 			}
 			break;
@@ -200,7 +205,7 @@ public class MovementController : MonoBehaviour {
 	}
 
 	public Vector3 GetSpawnPoint(){
-		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 40);
+		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 35);
 		return v;
 	}
 
@@ -219,6 +224,7 @@ public class MovementController : MonoBehaviour {
 	public void Smite(){
 		//Fancy push animation
 		Mutate(1);
+		gameObject.GetComponent<ActionController> ().transforming.Play ();
 	}
 }
 
