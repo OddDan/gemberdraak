@@ -6,10 +6,20 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: RockTotem_Large
+    100004: RockTotem_Small
     400000: //RootNode
+    400002: RockTotem_Large
+    400004: RockTotem_Small
     2300000: //RootNode
+    2300002: RockTotem_Large
+    2300004: RockTotem_Small
     3300000: //RootNode
+    3300002: RockTotem_Large
+    3300004: RockTotem_Small
     4300000: Cube
+    4300002: RockTotem_Small
+    4300004: RockTotem_Large
   materials:
     importMaterials: 1
     materialName: 0
