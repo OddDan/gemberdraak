@@ -50,6 +50,7 @@ public class ActionController : MonoBehaviour {
 								mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
 								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
+								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 								mc.carrying = true;
 							}
 						}
@@ -57,6 +58,7 @@ public class ActionController : MonoBehaviour {
 				} else {
 					throwing.Play ();
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
+					mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
 					mc.connectedPlayer.GetComponent<MovementController> ().verticalSpeed = 15;
 					mc.connectedPlayer = null;
@@ -76,7 +78,9 @@ public class ActionController : MonoBehaviour {
 		mc.lastLookDir = mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir;
 		// set to players direction not the direction of the carrying priest.
 		mc.SetState(charState.FLYING);
+		mc.anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.STUNNED);
+		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().stuntime = 0;
 		mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = null;
 		mc.connectedPlayer.GetComponent<MovementController> ().carrying = false;
