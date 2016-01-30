@@ -162,11 +162,12 @@ public class MovementController : MonoBehaviour {
 
 			break;
 		case charState.ENTERING:
-			velocity = (transform.position*-1)*(15*Time.deltaTime);
+			velocity = (transform.position * -1) * (15 * Time.deltaTime);
+			lastLookDir = velocity.normalized;
 			verticalSpeed -= gravity * Time.deltaTime;
 			velocity.y = verticalSpeed;
 			controller.Move (velocity * Time.deltaTime);
-			SetLookRotation (velocity);
+			SetLookRotation (lastLookDir);
 			if (Vector3.Distance (transform.position, Vector3.zero) < 28) {
 				SetState (charState.MOVEMENT);
 			}
@@ -219,6 +220,7 @@ public class MovementController : MonoBehaviour {
 	public void Smite(){
 		//Fancy push animation
 		Mutate(1);
+		gameObject.GetComponent<ActionController> ().transforming.Play ();
 	}
 }
 

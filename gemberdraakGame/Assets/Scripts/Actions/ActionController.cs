@@ -11,6 +11,11 @@ public class ActionController : MonoBehaviour {
 	public float grabDistance=1;
 	public float grabSize=1;
 
+	public AudioSource throwing;
+	public AudioSource shooting;
+	public AudioSource transforming;
+	public AudioSource pickup;
+
 	void Awake(){
 		mc = gameObject.GetComponent<MovementController> ();
 	}
@@ -20,6 +25,7 @@ public class ActionController : MonoBehaviour {
 		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_jump") && mc.type == charType.PRIEST) {
 			if (!mc.carrying && mc.canMove) {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
+					shooting.Play ();
 					lastFireTime = Time.realtimeSinceStartup;
 					Vector3 rotation = mc.lastLookDir;
 					rotation.y = 0;
@@ -32,11 +38,13 @@ public class ActionController : MonoBehaviour {
 		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_action")) {
 			if (mc.type == charType.PRIEST) {
 				if (!mc.carrying) {
+					
 					RaycastHit[] hits;
 					hits = Physics.SphereCastAll (transform.position, grabSize, mc.body.transform.forward, grabDistance);
 					foreach (RaycastHit hit in hits) {
 						if (hit.collider.gameObject.tag == "Player") {
 							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
+								pickup.Play ();
 								mc.connectedPlayer = hit.collider.gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
@@ -46,6 +54,7 @@ public class ActionController : MonoBehaviour {
 						}
 					}
 				} else {
+					throwing.Play ();
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
 					mc.connectedPlayer.GetComponent<MovementController> ().verticalSpeed = 15;
