@@ -12,6 +12,7 @@ public class ActionController : MonoBehaviour {
 	public float grabSize=1;
 
 	public AudioSource throwing;
+    public AudioSource throwingSound;
 	public AudioSource shooting;
 	public AudioSource transforming;
 	public AudioSource pickup;
@@ -56,6 +57,7 @@ public class ActionController : MonoBehaviour {
 					}
 				} else {
 					throwing.Play ();
+                    throwingSound.Play();
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
 					mc.connectedPlayer.GetComponent<MovementController> ().verticalSpeed = 15;
