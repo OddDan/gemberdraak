@@ -25,6 +25,7 @@ public class ActionController : MonoBehaviour {
 		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_jump") && mc.type == charType.PRIEST) {
 			if (!mc.carrying && mc.canMove) {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
+					shooting.pitch = Random.Range (0.8f, 1.2f);
 					shooting.Play ();
 					lastFireTime = Time.realtimeSinceStartup;
 					Vector3 rotation = mc.lastLookDir;
