@@ -2,16 +2,25 @@
 using System.Collections;
 
 public class MovementController : MonoBehaviour {
+	public float priestSpeed = 6.5f;
+	public float priestAcceleration = 25;
+	public float sheepSpeed = 9f;
+	public float sheepAcceleration = 35;
 
-	public float movementSpeed = 10f;
-	public float gravity = 9.87f;
+	float movementSpeed = 10f;
+	float gravity = 30f;
 	public float jumpSpeed;
-	public float acceleration = 8;
-	public string ctrlName = "CTRL1_";
-	public float stuntime = 2f;
-	public float throwSpeed = 30;
+
+	float acceleration = 8;
+	public int playerID = 1;
+	public float stuntime = 1.5f;
+	public float maxStunDuration = 1.5f;
+	public float throwSpeed = 10;
+
+	public float score = 0;
 
 	public charType type = charType.PRIEST;
+	public charState state = charState.MOVEMENT;
 
 	public GameObject body;
 	public GameObject priestModel;
@@ -20,14 +29,19 @@ public class MovementController : MonoBehaviour {
 	public float maxStruggle;
 	public float struggle;
 
+	public Vector3 lastLookDir;
+
 	public GameObject connectedPlayer;
 	public bool carrying = false;
 	public bool flying = false;
 
 	public Vector3 velocity;
-	float verticalSpeed;
+	public float verticalSpeed;
 	float zSpeed;
 	float xSpeed;
+
+	bool inBounds = true;
+
 	public bool canMove = true;
 
 	void Start () {
@@ -35,28 +49,10 @@ public class MovementController : MonoBehaviour {
 	}
 
 	void Update () {
-		
-		CheckType ();
+		CalculateStruggle ();
 		DoMovement ();
-
 	}
-
-	public void SetStun(){
-		StartCoroutine (Stun ());
-	}
-
-	IEnumerator Stun(){
-		canMove = false;
-		if(carrying){
-			carrying = false;
-			connectedPlayer.gameObject.GetComponent<MovementController> ().carrying = false;
-			connectedPlayer.gameObject.GetComponent<MovementController> ().connectedPlayer = null;
-			connectedPlayer = null;
-		}
-		yield return new WaitForSeconds (stuntime);
-		canMove = true;
-	}
-
+		
 	float AccelerateTowards(float speed, float acceleration, float targetSpeed){
 		if (speed == targetSpeed) {
 			return speed;
@@ -79,56 +75,118 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
-	void CheckType(){
-		if (type == charType.PRIEST) {
+	public void Mutate(int type){
+		if (type == 0) {
+			this.type = charType.PRIEST;
+			movementSpeed = priestSpeed;
+			acceleration = priestAcceleration;
 			priestModel.SetActive (true);
 			sheepModel.SetActive (false);
 			body = priestModel;
 		}
-		if (type == charType.SHEEP) {
-			CalculateStruggle ();
+		if (type == 1) {
+			this.type = charType.SHEEP;
+			movementSpeed = sheepSpeed;
+			acceleration = sheepAcceleration;
 			priestModel.SetActive (false);
 			sheepModel.SetActive (true);
 			body = sheepModel;
 		}
 	}
-
+		
 	void DoMovement(){
-		if (canMove) {
-			if (carrying && type == charType.SHEEP) {
+		CharacterController controller = gameObject.GetComponent<CharacterController> ();
+		//switch == with states.
 
-			} else {
-				zSpeed = AccelerateTowards (zSpeed, acceleration, Input.GetAxis (ctrlName + "vertical") * movementSpeed);
-				xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis (ctrlName + "horizontal") * movementSpeed);
+		switch (state) {
+		case charState.MOVEMENT:
+			zSpeed = AccelerateTowards (zSpeed, acceleration, Input.GetAxis ("CTRL" + playerID + "_vertical") * movementSpeed);
+			xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis ("CTRL" + playerID + "_horizontal") * movementSpeed);
 
-				velocity = new Vector3 (xSpeed, 0, zSpeed);
-				Vector3 dir = new Vector3 (xSpeed, 0, zSpeed);
-
-
-				CharacterController controller = gameObject.GetComponent<CharacterController> ();
-				if (controller.isGrounded) {
-					verticalSpeed = 0;
-					if (Input.GetButtonDown (ctrlName + "jump") && type == charType.SHEEP) {
-						verticalSpeed = jumpSpeed;
-					}
-				} 
-				verticalSpeed -= gravity * Time.deltaTime;
-				velocity.y = verticalSpeed;
-
-				if (velocity.magnitude > 1) {
-					SetLookRotation (dir);
-				}
-
-				controller.Move (velocity * Time.deltaTime);
+			velocity = new Vector3 (xSpeed, 0, zSpeed);
+			if (velocity.magnitude > 1f) {
+				lastLookDir = new Vector3 (xSpeed, 0, zSpeed).normalized;
 			}
-		}
 
-		if (carrying && type == charType.SHEEP){
-			SetLookRotation (connectedPlayer.GetComponent<MovementController>().body.transform.forward);
+			if (controller.isGrounded) {
+				verticalSpeed = 0;
+				if (Input.GetButtonDown ("CTRL" + playerID + "_jump") && type == charType.SHEEP) {
+					verticalSpeed = jumpSpeed;
+				}
+			} 
+			verticalSpeed -= gravity * Time.deltaTime;
+			velocity.y = verticalSpeed;
+
+			SetLookRotation (lastLookDir);
+
+			controller.Move (velocity * Time.deltaTime);
+			break;
+		case charState.CARRIED:
+			
+			SetLookRotation (connectedPlayer.GetComponent<MovementController> ().body.transform.forward);
 			Vector3 targetPos = connectedPlayer.transform.position;
 			targetPos.y += 3.5f;
 			transform.position = targetPos;
+
+			break;
+		case charState.FLYING:
+			verticalSpeed -= gravity * Time.deltaTime;
+
+			velocity = lastLookDir.normalized * 10;
+			velocity.y = verticalSpeed;
+
+			controller.Move (velocity * Time.deltaTime);
+
+			if (controller.isGrounded) {
+				carrying = false;
+				SetState (charState.MOVEMENT);
+			}
+
+			break;
+		case charState.FLEEING:
+			if (!controller.isGrounded) {
+				velocity = lastLookDir.normalized * 10;
+			}
+			if (controller.isGrounded) {
+				carrying = false;
+				velocity = transform.position * 15 * Time.deltaTime;
+				SetLookRotation (velocity);
+			}
+			verticalSpeed -= gravity * Time.deltaTime;
+			velocity.y = verticalSpeed;
+			controller.Move (velocity * Time.deltaTime);
+			if (Vector3.Distance (transform.position, Vector3.zero) > 50) {
+				Mutate (0);
+				Respawn ();
+			}
+
+			break;
+		case charState.ENTERING:
+			velocity = (transform.position*-1)*(15*Time.deltaTime);
+			verticalSpeed -= gravity * Time.deltaTime;
+			velocity.y = verticalSpeed;
+			controller.Move (velocity * Time.deltaTime);
+			SetLookRotation (velocity);
+			if (Vector3.Distance (transform.position, Vector3.zero) < 28) {
+				SetState (charState.MOVEMENT);
+			}
+			break;
+		case charState.STUNNED:
+			stuntime += Time.deltaTime;
+			if (stuntime > maxStunDuration) {
+				SetState (charState.MOVEMENT);
+			} 
+			if (carrying) {
+				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+			}
+			break;
+		default:
+			break;
 		}
+	}
+
+	public void SetState(charState newState){
+		state = newState;
 	}
 
 	void CalculateStruggle(){
@@ -141,22 +199,26 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
-	public IEnumerator Flying(float forward, float height){
-		canMove = false;
-		carrying = false;
-		Vector3 dir = connectedPlayer.GetComponent<MovementController> ().velocity;
+	public Vector3 GetSpawnPoint(){
+		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 50);
+		return v;
+	}
 
-		CharacterController controller = gameObject.GetComponent<CharacterController> ();
-		controller.Move (Vector3.up);
-		verticalSpeed = (height);
-		while (!controller.isGrounded) {
-			velocity = dir.normalized * forward;
-			verticalSpeed -= gravity * Time.deltaTime;
-			velocity.y = verticalSpeed;
-			controller.Move (velocity * Time.deltaTime);
-			yield return null;
-		}
-		canMove = true;
+	public void Respawn(){
+		SetState (charState.ENTERING);
+		transform.position = GetSpawnPoint();
+	}		
+
+	public void RemoveConnection(){
+		carrying = false;
+		connectedPlayer.gameObject.GetComponent<MovementController> ().carrying = false;
+		connectedPlayer.gameObject.GetComponent<MovementController> ().connectedPlayer = null;
+		connectedPlayer = null;
+	}
+
+	public void Smite(){
+		//Fancy push animation
+		Mutate(1);
 	}
 }
 
@@ -165,3 +227,12 @@ public enum charType{
 	SHEEP
 }
 
+public enum charState{
+	IDLE,
+	MOVEMENT,
+	CARRIED,
+	FLYING,
+	FLEEING,
+	ENTERING,
+	STUNNED
+}

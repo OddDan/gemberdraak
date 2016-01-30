@@ -17,11 +17,11 @@ public class ActionController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown (mc.ctrlName + "jump") && mc.type == charType.PRIEST) {
+		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_jump") && mc.type == charType.PRIEST) {
 			if (!mc.carrying && mc.canMove) {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 					lastFireTime = Time.realtimeSinceStartup;
-					Vector3 rotation = mc.velocity;
+					Vector3 rotation = mc.lastLookDir;
 					rotation.y = 0;
 					GameObject projectileShot = GameObject.Instantiate (projectile, transform.position, Quaternion.LookRotation (rotation.normalized, Vector3.up)) as GameObject;
 					Projectile pro = projectileShot.GetComponent<Projectile> ();
@@ -29,39 +29,47 @@ public class ActionController : MonoBehaviour {
 				}
 			}
 		}
-		if (Input.GetButtonDown (mc.ctrlName + "action") && mc.type == charType.PRIEST) {
-			if (!mc.carrying) {
-				RaycastHit[] hits;
-				hits = Physics.SphereCastAll (transform.position, grabSize, mc.body.transform.forward, grabDistance);
-				foreach (RaycastHit hit in hits) {
-					if (hit.collider.gameObject.tag == "Player") {
-						if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
-							mc.connectedPlayer = hit.collider.gameObject;
-							mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
-							mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
-							mc.carrying = true;
+		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_action")) {
+			if (mc.type == charType.PRIEST) {
+				if (!mc.carrying) {
+					RaycastHit[] hits;
+					hits = Physics.SphereCastAll (transform.position, grabSize, mc.body.transform.forward, grabDistance);
+					foreach (RaycastHit hit in hits) {
+						if (hit.collider.gameObject.tag == "Player") {
+							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
+								mc.connectedPlayer = hit.collider.gameObject;
+								mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
+								mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
+								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
+								mc.carrying = true;
+							}
 						}
 					}
+				} else {
+					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
+					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
+					mc.connectedPlayer.GetComponent<MovementController> ().verticalSpeed = 15;
+					mc.connectedPlayer = null;
+					mc.carrying = false;
 				}
-			} else {
-				StartCoroutine(mc.connectedPlayer.GetComponent<MovementController>().Flying(mc.throwSpeed, 22));
-				mc.connectedPlayer = null;
-				mc.carrying = false;
+			}
+			if(mc.state == charState.CARRIED){
+				mc.struggle += 10;
+				if (mc.struggle >= mc.maxStruggle) {
+					SetFree ();
+				}
 			}
 		}
-
-		if (Input.GetButtonDown (mc.ctrlName + "action") && mc.type == charType.SHEEP && mc.carrying) {
-			mc.struggle += 10;
-			if (mc.struggle >= mc.maxStruggle) {
-				SetFree ();
-			}
-		}
-
 	}
 
 	void SetFree(){
-		StartCoroutine (mc.Flying(10,5));
-		mc.connectedPlayer.GetComponent<MovementController> ().SetStun ();
+		mc.lastLookDir = mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir;
+		// set to players direction not the direction of the carrying priest.
+		mc.SetState(charState.FLYING);
+		mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.STUNNED);
+		mc.connectedPlayer.GetComponent<MovementController> ().stuntime = 0;
+		mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = null;
+		mc.connectedPlayer.GetComponent<MovementController> ().carrying = false;
 		mc.struggle = 0;
 	}
 
