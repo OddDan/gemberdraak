@@ -58,6 +58,7 @@ ModelImporter:
     4300000: polySurface16
     7400000: Idle
     7400002: running
+    7400004: wiggle
     9500000: //RootNode
     13700000: polySurface16
   materials:
@@ -237,6 +238,84 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: wiggle
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 132
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: polySurface16
+        weight: 1
+      - path: schp_root
+        weight: 1
+      - path: schp_root/schp_buik
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Apoot1
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Apoot1/schp_L_Apoot2
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Apoot1/schp_L_Apoot2/schp_L_Apoot3
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Vpoot1
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Vpoot1/schp_L_Vpoot2
+        weight: 1
+      - path: schp_root/schp_buik/schp_L_Vpoot1/schp_L_Vpoot2/schp__L_Vpoot3
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_L_oor1
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_L_oor1/schp_L_oor2
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_L_oor1/schp_L_oor2/schp_L_oor3
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_R_oor1
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_R_oor1/schp_R_oor2
+        weight: 1
+      - path: schp_root/schp_buik/schp_nek/schp_kop/schp_R_oor1/schp_R_oor2/schp_R_oor3
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Apoot1
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Apoot1/schp_R_Apoot2
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Apoot1/schp_R_Apoot2/schp_R_Apoot3
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Vpoot1
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Vpoot1/schp_R_Vpoot2
+        weight: 1
+      - path: schp_root/schp_buik/schp_R_Vpoot1/schp_R_Vpoot2/schp__R_Vpoot3
+        weight: 1
+      - path: schp_root/schp_buik/schp_rug
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
