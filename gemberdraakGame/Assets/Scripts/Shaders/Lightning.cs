@@ -41,7 +41,7 @@ public class Lightning : MonoBehaviour
 	{
 		GetComponent<Renderer> ().enabled = true;
 		transform.position = position;
-
+		GetComponent<AudioSource> ().Play ();
 		casting = true;
 		time = 0f;
 
