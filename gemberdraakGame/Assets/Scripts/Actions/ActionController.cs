@@ -28,6 +28,9 @@ public class ActionController : MonoBehaviour {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 					shooting.pitch = Random.Range (0.8f, 1.2f);
 					shooting.Play ();
+					mc.anim.SetTrigger ("Jump");
+					mc.anim.SetLayerWeight (2, 1);
+					StartCoroutine (SetLayer ());
 					lastFireTime = Time.realtimeSinceStartup;
 					Vector3 rotation = mc.lastLookDir;
 					rotation.y = 0;
@@ -47,18 +50,28 @@ public class ActionController : MonoBehaviour {
 						if (hit.collider.gameObject.tag == "Player") {
 							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
 								pickup.Play ();
+								mc.anim.SetBool ("Carrying", true);
 								mc.connectedPlayer = hit.collider.gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = gameObject;
 								mc.connectedPlayer.GetComponent<MovementController> ().carrying = true;
 								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
+								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
+								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Carrying", true);
+								mc.anim.SetLayerWeight (1, 1);
 								mc.carrying = true;
 							}
 						}
 					}
 				} else {
 					throwing.Play ();
+
                     throwingSound.Play();
+
+					mc.anim.SetBool ("Carrying", false);
+					mc.anim.SetLayerWeight (1, 0);
+
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
+					mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
 					mc.connectedPlayer.GetComponent<MovementController> ().verticalSpeed = 15;
 					mc.connectedPlayer = null;
@@ -74,11 +87,18 @@ public class ActionController : MonoBehaviour {
 		}
 	}
 
+	IEnumerator SetLayer(){
+		yield return new WaitForSeconds (0.625f);
+		mc.anim.SetLayerWeight (2, 0);
+	}
+
 	void SetFree(){
 		mc.lastLookDir = mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir;
 		// set to players direction not the direction of the carrying priest.
 		mc.SetState(charState.FLYING);
+		mc.anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.STUNNED);
+		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().stuntime = 0;
 		mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = null;
 		mc.connectedPlayer.GetComponent<MovementController> ().carrying = false;
