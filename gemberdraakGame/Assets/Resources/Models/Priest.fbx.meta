@@ -124,7 +124,307 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Priest_Rig|Priest_Idle
+      takeName: Priest_Rig|Priest_Idle
+      firstFrame: 0
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Priest
+        weight: 1
+      - path: Priest_Rig
+        weight: 1
+      - path: Priest_Rig/Root
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L/FootControl.L_end
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R/FootControl.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head/Head_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L/Fingers.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R/Fingers.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R/Toes.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Priest_Rig|Priest_Run
+      takeName: Priest_Rig|Priest_Run
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Priest
+        weight: 1
+      - path: Priest_Rig
+        weight: 1
+      - path: Priest_Rig/Root
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L/FootControl.L_end
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R/FootControl.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head/Head_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L/Fingers.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R/Fingers.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R/Toes.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Priest_Rig|Priest_Walk
+      takeName: Priest_Rig|Priest_Walk
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Priest
+        weight: 1
+      - path: Priest_Rig
+        weight: 1
+      - path: Priest_Rig/Root
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.L/FootControl.L_end
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R
+        weight: 1
+      - path: Priest_Rig/Root/FootControl.R/FootControl.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Head/Head_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.L/UpperArm.L/Forearm.L/Hand.L/Fingers.L/Fingers.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperBack/Shoulder.R/UpperArm.R/Forearm.R/Hand.R/Fingers.R/Fingers.R_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.L/LowerLeg.L/Foot.L/Foot1.L/Toes.L/Toes.L_end
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R
+        weight: 1
+      - path: Priest_Rig/Root/LowerBack/UpperLeg.R/LowerLeg.R/Foot.R/Foot1.R/Toes.R/Toes.R_end
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

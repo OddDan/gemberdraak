@@ -7,6 +7,10 @@ public class MovementController : MonoBehaviour {
 	public float sheepSpeed = 9f;
 	public float sheepAcceleration = 35;
 
+	public Animator sheepAnim;
+	public Animator priestAnim;
+	public Animator anim;
+
 	float movementSpeed = 10f;
 	float gravity = 30f;
 	public float jumpSpeed;
@@ -46,6 +50,7 @@ public class MovementController : MonoBehaviour {
 
 	void Start () {
 		velocity = Vector3.zero;
+		anim.SetBool ("Movement", true);
 	}
 
 	void Update () {
@@ -83,6 +88,7 @@ public class MovementController : MonoBehaviour {
 			priestModel.SetActive (true);
 			sheepModel.SetActive (false);
 			body = priestModel;
+			anim = priestAnim;
 		}
 		if (type == 1) {
 			this.type = charType.SHEEP;
@@ -91,6 +97,7 @@ public class MovementController : MonoBehaviour {
 			priestModel.SetActive (false);
 			sheepModel.SetActive (true);
 			body = sheepModel;
+			anim = sheepAnim;
 		}
 	}
 		
@@ -104,6 +111,7 @@ public class MovementController : MonoBehaviour {
 			xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis ("CTRL" + playerID + "_horizontal") * movementSpeed);
 
 			velocity = new Vector3 (xSpeed, 0, zSpeed);
+			anim.SetFloat ("Speed", velocity.magnitude);
 			if (velocity.magnitude > 1f) {
 				lastLookDir = new Vector3 (xSpeed, 0, zSpeed).normalized;
 			}
@@ -111,6 +119,7 @@ public class MovementController : MonoBehaviour {
 			if (controller.isGrounded) {
 				verticalSpeed = 0;
 				if (Input.GetButtonDown ("CTRL" + playerID + "_jump") && type == charType.SHEEP) {
+					anim.SetTrigger ("Jump");
 					verticalSpeed = jumpSpeed;
 				}
 			} 
@@ -141,6 +150,8 @@ public class MovementController : MonoBehaviour {
 				carrying = false;
 				if (state != charState.FLEEING) {
 					SetState (charState.MOVEMENT);
+					anim.SetBool ("Carrying", false);
+					anim.SetBool ("Movement", true);
 				}
 			}
 
@@ -156,6 +167,7 @@ public class MovementController : MonoBehaviour {
 			}
 			verticalSpeed -= gravity * Time.deltaTime;
 			velocity.y = verticalSpeed;
+			anim.SetFloat ("Speed", velocity.magnitude);
 			controller.Move (velocity * Time.deltaTime);
 			if (Vector3.Distance (transform.position, Vector3.zero) > 35) {
 				Mutate (0);
@@ -168,20 +180,25 @@ public class MovementController : MonoBehaviour {
 			lastLookDir = velocity.normalized;
 			verticalSpeed -= gravity * Time.deltaTime;
 			velocity.y = verticalSpeed;
+			anim.SetFloat ("Speed", velocity.magnitude);
 			controller.Move (velocity * Time.deltaTime);
 			SetLookRotation (lastLookDir);
 			if (Vector3.Distance (transform.position, Vector3.zero) < 25) {
 				xSpeed = 0;
 				zSpeed = 0;
 				SetState (charState.MOVEMENT);
+				anim.SetBool ("Movement", true);
 			}
 			break;
 		case charState.STUNNED:
 			stuntime += Time.deltaTime;
 			if (stuntime > maxStunDuration) {
 				SetState (charState.MOVEMENT);
+				anim.SetBool ("Movement", true);
 			} 
 			if (carrying) {
+				anim.SetBool ("Carrying", false);
+				carrying = false;
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
 			}
 			break;
@@ -190,7 +207,7 @@ public class MovementController : MonoBehaviour {
 		}
 
 		// Out of bounds
-		Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
+		// Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
 		if(type == charType.SHEEP){
 			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
 		}else{
@@ -219,6 +236,7 @@ public class MovementController : MonoBehaviour {
 
 	public void Respawn(){
 		SetState (charState.ENTERING);
+		anim.SetBool ("Movement", true);
 		transform.position = GetSpawnPoint();
 	}		
 

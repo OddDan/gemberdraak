@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 6c32bd8c4a0a44d4cbeee99205ac1b6b
-timeCreated: 1454165813
-licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -58,7 +56,7 @@ ModelImporter:
     4300000: polySurface16
     7400000: Idle
     7400002: running
-    7400004: wiggle
+    7400004: Wiggle
     9500000: //RootNode
     13700000: polySurface16
   materials:
@@ -93,7 +91,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -159,7 +157,7 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
       name: running
       takeName: Take 001
@@ -171,7 +169,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -237,9 +235,9 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: wiggle
+      name: Wiggle
       takeName: Take 001
       firstFrame: 100
       lastFrame: 132
@@ -249,7 +247,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

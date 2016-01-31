@@ -24,6 +24,7 @@ public class Aura : MonoBehaviour
 
 	public void AuraBurst (float time)
 	{
+		StopAllCoroutines ();
 		StartCoroutine (AuraBurstCoroutine (time));
 	}
 

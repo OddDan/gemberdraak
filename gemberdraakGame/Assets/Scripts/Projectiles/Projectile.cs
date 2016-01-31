@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			if (other.gameObject.GetComponent<MovementController>() != mc) {
 				other.gameObject.GetComponent<MovementController> ().SetState(charState.STUNNED);
+				other.gameObject.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 				other.gameObject.GetComponent<MovementController> ().stuntime = 0;
 				Destroy (gameObject);
 			}
