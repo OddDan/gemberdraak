@@ -17,9 +17,9 @@ public class Aura : MonoBehaviour
 		material.SetFloat ("_Opacity", (Mathf.Sin (Time.time) + 2) / 8);
 
 		//if (Input.GetKeyDown(KeyCode.Space))
-		{
+		//{
 		//		AuraBurst(1f);
-		}
+		//}
 	}
 
 	public void AuraBurst (float time)

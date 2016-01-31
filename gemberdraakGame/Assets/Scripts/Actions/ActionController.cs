@@ -27,6 +27,9 @@ public class ActionController : MonoBehaviour {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 					shooting.pitch = Random.Range (0.8f, 1.2f);
 					shooting.Play ();
+					mc.anim.SetTrigger ("Jump");
+					mc.anim.SetLayerWeight (2, 1);
+					StartCoroutine (SetLayer ());
 					lastFireTime = Time.realtimeSinceStartup;
 					Vector3 rotation = mc.lastLookDir;
 					rotation.y = 0;
@@ -77,6 +80,11 @@ public class ActionController : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	IEnumerator SetLayer(){
+		yield return new WaitForSeconds (0.625f);
+		mc.anim.SetLayerWeight (2, 0);
 	}
 
 	void SetFree(){
