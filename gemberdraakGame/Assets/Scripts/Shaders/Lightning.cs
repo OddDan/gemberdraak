@@ -32,9 +32,8 @@ public class Lightning : MonoBehaviour
 			{
 				GetComponent<Renderer> ().enabled = false;
 				casting = false;
+				LightningEffect.casting = false;
 			}
-
-			material.SetFloat ("_Theta", (1 - time) * 70);
 		}
 	}
 
@@ -46,6 +45,6 @@ public class Lightning : MonoBehaviour
 		casting = true;
 		time = 0f;
 
-		material.SetFloat ("_Theta", 70);
+		LightningEffect.casting = true;
 	}
 }
