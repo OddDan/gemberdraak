@@ -27,7 +27,7 @@ public class ActionController : MonoBehaviour {
 			if (!mc.carrying && mc.canMove) {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 					shooting.pitch = Random.Range (0.8f, 1.2f);
-					shooting.Play ();
+					//shooting.Play ();
 					mc.anim.SetTrigger ("Jump");
 					mc.anim.SetLayerWeight (2, 1);
 					StartCoroutine (SetLayer ());
