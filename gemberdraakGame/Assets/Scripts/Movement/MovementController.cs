@@ -84,7 +84,6 @@ public class MovementController : MonoBehaviour {
 		RaycastHit[] hits;
 		hits = Physics.SphereCastAll (transform.position, lightningRadius, Vector3.up, 1);
 		foreach (RaycastHit hit in hits) {
-			Debug.Log (GameObject.Find ("Lightning").GetComponent<Lightning> ());
 			GameObject.Find ("Lightning").GetComponent<Lightning> ().CastLightning (transform.position);
 			if (hit.transform.tag == "Player" && hit.transform.gameObject.GetComponent<MovementController> ().playerID != playerID && hit.transform.gameObject.GetComponent<MovementController> ().type != charType.SHEEP) {
 				hit.transform.gameObject.GetComponent<MovementController> ().SetState (charState.KNOCKBACK);

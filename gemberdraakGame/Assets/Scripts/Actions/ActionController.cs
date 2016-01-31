@@ -45,7 +45,7 @@ public class ActionController : MonoBehaviour {
 				if (!mc.carrying) {
 					
 					RaycastHit[] hits;
-					hits = Physics.SphereCastAll (transform.position, grabSize, mc.body.transform.forward, grabDistance);
+					hits = Physics.SphereCastAll (transform.position + mc.body.transform.forward*grabDistance, grabSize, mc.body.transform.up, 5);
 					foreach (RaycastHit hit in hits) {
 						if (hit.collider.gameObject.tag == "Player") {
 							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
@@ -98,7 +98,11 @@ public class ActionController : MonoBehaviour {
 		mc.SetState(charState.FLYING);
 		mc.anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.STUNNED);
+		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Carrying", false);
+		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetLayerWeight (2, 0);
+		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetLayerWeight (1, 0);
 		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
+		mc.connectedPlayer.GetComponent<MovementController> ().carrying = false;
 		mc.connectedPlayer.GetComponent<MovementController> ().stuntime = 0;
 		mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = null;
 		mc.struggle = 0;

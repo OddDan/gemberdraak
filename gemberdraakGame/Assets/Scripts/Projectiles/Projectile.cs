@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour {
 	public bool inactive;
 	public AudioSource hit;
 	public AudioSource fire;
+	public GameObject explosion;
 
 	void Awake(){
 		rb = gameObject.GetComponent<Rigidbody> ();
@@ -55,6 +56,7 @@ public class Projectile : MonoBehaviour {
 	IEnumerator DestroyProjectile(){
 		speed = 0;
 		inactive = true;
+		Instantiate (explosion, transform.position, Quaternion.identity);
 		yield return new WaitForSeconds (0.6f);
 		Destroy (gameObject);
 	}

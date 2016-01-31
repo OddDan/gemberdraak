@@ -8,6 +8,9 @@ public class Lightning : MonoBehaviour
 	private bool casting = false;
 	private float time = 0f;
 
+	public ParticleSystem dust;
+	public ParticleSystem cracks;
+
 	void Awake ()
 	{
 		material = GetComponent<Renderer> ().material;
@@ -44,6 +47,9 @@ public class Lightning : MonoBehaviour
 		GetComponent<AudioSource> ().Play ();
 		casting = true;
 		time = 0f;
+
+		cracks.Play ();
+		dust.Emit (100);
 
 		LightningEffect.casting = true;
 	}
