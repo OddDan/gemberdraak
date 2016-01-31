@@ -21,8 +21,6 @@ public class MovementController : MonoBehaviour {
 	public float maxStunDuration = 1.5f;
 	public float throwSpeed = 10;
 
-	public float score = 0;
-
 	public charType type = charType.PRIEST;
 	public charState state = charState.MOVEMENT;
 
