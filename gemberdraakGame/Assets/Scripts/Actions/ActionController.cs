@@ -27,6 +27,9 @@ public class ActionController : MonoBehaviour {
 				if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
 					shooting.pitch = Random.Range (0.8f, 1.2f);
 					shooting.Play ();
+					mc.anim.SetTrigger ("Jump");
+					mc.anim.SetLayerWeight (2, 1);
+					StartCoroutine (SetLayer ());
 					lastFireTime = Time.realtimeSinceStartup;
 					Vector3 rotation = mc.lastLookDir;
 					rotation.y = 0;
@@ -53,6 +56,7 @@ public class ActionController : MonoBehaviour {
 								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
 								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Carrying", true);
+								mc.anim.SetLayerWeight (1, 1);
 								mc.carrying = true;
 							}
 						}
@@ -60,6 +64,7 @@ public class ActionController : MonoBehaviour {
 				} else {
 					throwing.Play ();
 					mc.anim.SetBool ("Carrying", false);
+					mc.anim.SetLayerWeight (1, 0);
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
 					mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
@@ -75,6 +80,11 @@ public class ActionController : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	IEnumerator SetLayer(){
+		yield return new WaitForSeconds (0.625f);
+		mc.anim.SetLayerWeight (2, 0);
 	}
 
 	void SetFree(){
