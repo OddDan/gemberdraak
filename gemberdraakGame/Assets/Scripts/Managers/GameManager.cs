@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
 	public float[] playerScores = {0, 0, 0, 0};
 
 	public GameObject[] players;
-	[SerializeField] GameObject[] soulStaches;
+	public GameObject[] soulStaches;
 
 	void Awake(){
 		if (_GM == null) {

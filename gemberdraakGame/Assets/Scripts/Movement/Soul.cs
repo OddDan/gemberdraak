@@ -20,7 +20,8 @@ public class Soul : MonoBehaviour {
 		if(d.magnitude > 0.1){
 			velocity = d * 0.02f;
 		}else if(isInFocus){
-			Camera.main.GetComponent<CameraZoom>().SetFocus(ID-1, GameManager._GM.players[ID-1]);
+			//GameManager._GM.players[ID-1].transform.position = target * 0.8f;
+			GameManager._GM.players[ID-1].GetComponent<MovementController> ().Respawn();
 			isInFocus = false;
 		}
 		
