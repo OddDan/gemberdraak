@@ -134,7 +134,8 @@ public class MovementController : MonoBehaviour {
 			
 			SetLookRotation (connectedPlayer.GetComponent<MovementController> ().body.transform.forward);
 			Vector3 targetPos = connectedPlayer.transform.position;
-			targetPos.y += 3.5f;
+			targetPos.y += 2.5f;
+			targetPos += connectedPlayer.GetComponent<MovementController> ().body.transform.forward * 0.7f;
 			transform.position = targetPos;
 
 			break;
