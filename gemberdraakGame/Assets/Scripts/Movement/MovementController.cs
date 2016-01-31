@@ -9,6 +9,9 @@ public class MovementController : MonoBehaviour {
 	public float sheepAcceleration = 35;
 
 	public bool isDemonLord = false;
+	public bool hasDestruct = false;
+	public GameObject gore;
+	public GameObject death;
 
 	public float lightningRadius = 6f;
 
@@ -63,6 +66,11 @@ public class MovementController : MonoBehaviour {
 		isDemonLord = GameManager._GM.playerScores[playerID-1] >= 5;
 
 		if(isDemonLord && transform.position.y >= 0){
+			if(!hasDestruct){
+				GameObject d = Instantiate(death, transform.position, transform.rotation) as GameObject;
+				d.transform.parent = transform;
+				hasDestruct = true;
+			}
 			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 4, Time.deltaTime);
 		}
 
@@ -91,6 +99,11 @@ public class MovementController : MonoBehaviour {
 				body.transform.rotation *= Quaternion.Euler (0, -90, 0);
 			}
 		}
+	}
+
+	public void Kill(){
+		Instantiate(gore, transform.position, Quaternion.identity);
+		Respawn();
 	}
 
 	void LightningStrike(){
