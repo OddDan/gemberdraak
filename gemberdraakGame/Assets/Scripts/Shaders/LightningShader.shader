@@ -11,7 +11,16 @@
 
 		Pass
 		{
+			ZWrite On
+			ColorMask A
+		}
+
+		Pass
+		{
+//			Cull Back
 			ZWrite Off
+			ZTest LEqual
+			ColorMask RGB
 
 			Blend SrcAlpha OneMinusSrcAlpha
 
@@ -46,6 +55,7 @@
 
 				return col;
 			}
+
 			ENDCG
 		}
 	}
