@@ -37,7 +37,7 @@ public class Aura : MonoBehaviour
 		{
 			float value = (1 - Mathf.Sin (2 * Mathf.PI * t + Mathf.PI / 2)) / 6;
 
-			material.SetFloat ("_Opacity", Mathf.Lerp(material.GetFloat("_Opacity"), value, Time.deltaTime * 60));
+			material.SetFloat ("_Opacity", Mathf.Lerp(material.GetFloat("_Opacity"), value + 100, Time.deltaTime * 60));
 			material.SetFloat ("_Height", value + 0.1f);
 
 			t += Time.deltaTime / time;
