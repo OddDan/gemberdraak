@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 28110ef4a6f1a7944a80d5259221392b
-timeCreated: 1454199586
+guid: ea69b6740f6ead74e80ec546979aa492
+timeCreated: 1454199492
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder
-    4300002: Torus
+    4300000: Torus
   materials:
     importMaterials: 1
     materialName: 0
