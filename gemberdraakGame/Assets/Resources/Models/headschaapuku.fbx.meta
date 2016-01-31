@@ -7,11 +7,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: polySurface34
+    100004: hoofd
     400000: //RootNode
     400002: polySurface34
+    400004: hoofd
     2300000: polySurface34
+    2300002: hoofd
     3300000: polySurface34
+    3300002: hoofd
     4300000: polySurface34
+    4300002: hoofd
   materials:
     importMaterials: 1
     materialName: 0
