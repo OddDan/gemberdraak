@@ -7,6 +7,8 @@ public class MovementController : MonoBehaviour {
 	public float sheepSpeed = 9f;
 	public float sheepAcceleration = 35;
 
+	public bool isDemonLord = false;
+
 	public float lightningRadius = 6f;
 
 	public Animator sheepAnim;
@@ -56,6 +58,12 @@ public class MovementController : MonoBehaviour {
 	void Update () {
 		CalculateStruggle ();
 		DoMovement ();
+
+		isDemonLord = GameManager._GM.playerScores[playerID-1] >= 5;
+
+		if(isDemonLord && transform.position.y >= 0){
+			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 4, Time.deltaTime);
+		}
 	}
 		
 	float AccelerateTowards(float speed, float acceleration, float targetSpeed){

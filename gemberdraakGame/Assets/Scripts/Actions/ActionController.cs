@@ -48,7 +48,7 @@ public class ActionController : MonoBehaviour {
 					hits = Physics.SphereCastAll (transform.position + mc.body.transform.forward*grabDistance, grabSize, mc.body.transform.up, 5);
 					foreach (RaycastHit hit in hits) {
 						if (hit.collider.gameObject.tag == "Player") {
-							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
+							if (hit.collider.gameObject.GetComponent<MovementController> ().type == charType.SHEEP && !hit.collider.gameObject.GetComponent<MovementController> ().isDemonLord) {
 								pickup.Play ();
 								mc.anim.SetBool ("Carrying", true);
 								mc.connectedPlayer = hit.collider.gameObject;
