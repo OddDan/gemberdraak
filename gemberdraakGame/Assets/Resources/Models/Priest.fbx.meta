@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: fb202cefd734f674b92f2108d27f8d14
-timeCreated: 1454163772
+timeCreated: 1454199701
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -115,7 +115,10 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Priest_Rig|Priest_Walk' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation DOF
+      on avatar to improve retargeting quality.\n\t'UpperLeg.R' has translation animation
+      that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     animationCompression: 3

@@ -53,6 +53,7 @@ public class ActionController : MonoBehaviour {
 								mc.connectedPlayer.GetComponent<MovementController> ().SetState (charState.CARRIED);
 								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 								mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Carrying", true);
+								mc.anim.SetLayerWeight (1, 1);
 								mc.carrying = true;
 							}
 						}
@@ -60,6 +61,7 @@ public class ActionController : MonoBehaviour {
 				} else {
 					throwing.Play ();
 					mc.anim.SetBool ("Carrying", false);
+					mc.anim.SetLayerWeight (1, 0);
 					mc.connectedPlayer.GetComponent<MovementController> ().SetState(charState.FLYING);
 					mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 					mc.connectedPlayer.GetComponent<MovementController> ().lastLookDir = mc.lastLookDir;
