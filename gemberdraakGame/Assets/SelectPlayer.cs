@@ -12,7 +12,6 @@ public class SelectPlayer : MonoBehaviour {
 		if (Input.GetButtonDown ("CTRL" + ID +"_jump")) {
 			ready = !ready;
 		}
-
 		if (ready) {
 			child.SetActive (true);
 		} else {
