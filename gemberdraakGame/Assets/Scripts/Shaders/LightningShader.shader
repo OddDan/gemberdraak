@@ -7,7 +7,7 @@
 	}
 	SubShader
 	{
-		Tags { "Queue" = "Transparent" "RenderType" = "Transparent" }
+		Tags { "RenderType" = "Opaque" }
 
 		Pass
 		{
@@ -33,7 +33,6 @@
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
-				float4 color : Color;
 			};
 
 			float4 _Color;
@@ -43,17 +42,12 @@
 			{
 				v2f o;
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-				o.color = float4(_Color.r, _Color.g, _Color.b, - _Theta + mul(_Object2World, v.vertex).y);
 				return o;
 			}
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
-				fixed4 col = i.color;
-				//col.a *= i.color.a;
-
-				return col;
+				return float4(1,1,1,1);
 			}
 
 			ENDCG
