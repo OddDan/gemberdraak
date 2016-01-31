@@ -47,7 +47,7 @@
 
 				luminosity = 1 - step(luminosity, 0.4f);
 
-				fixed4 final = lerp(col, luminosity, sin(10 * 3.1415 * _Time.y));
+				fixed4 final = lerp(col, luminosity, min(0.2, sin(10 * 3.1415 * _Time.y)));
 
 				return final;
 			}
