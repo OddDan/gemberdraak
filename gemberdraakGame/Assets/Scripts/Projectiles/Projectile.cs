@@ -22,7 +22,13 @@ public class Projectile : MonoBehaviour {
 		Debug.Log (other.gameObject.tag);
 		if (other.gameObject.tag == "Player" && !inactive) {
 			if (other.gameObject.GetComponent<MovementController>() != mc) {
-				other.gameObject.GetComponent<MovementController> ().SetState(charState.STUNNED);
+				if (other.gameObject.GetComponent<MovementController> ().type == charType.SHEEP) {
+					other.gameObject.GetComponent<MovementController> ().SetState (charState.STUNNED);
+				} else {
+					other.gameObject.GetComponent<MovementController> ().SetState (charState.KNOCKBACK);
+					other.gameObject.GetComponent<MovementController> ().verticalSpeed = 5;
+					other.gameObject.GetComponent<MovementController> ().lastLookDir = transform.forward*-1;
+				}
 				other.gameObject.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 				other.gameObject.GetComponent<MovementController> ().stuntime = 0;
 				GetComponent<ParticleSystem> ().Stop ();
@@ -43,7 +49,7 @@ public class Projectile : MonoBehaviour {
 	IEnumerator DestroyProjectile(){
 		speed = 0;
 		inactive = true;
-		yield return new WaitForSeconds (0.4f);
+		yield return new WaitForSeconds (0.6f);
 		Destroy (gameObject);
 	}
 }

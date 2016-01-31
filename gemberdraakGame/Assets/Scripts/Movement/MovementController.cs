@@ -230,7 +230,11 @@ public class MovementController : MonoBehaviour {
 			velocity.y = verticalSpeed;
 
 			controller.Move (velocity * Time.deltaTime);
-
+			if (carrying) {
+				anim.SetBool ("Carrying", false);
+				carrying = false;
+				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+			}
 			if (controller.isGrounded) {
 				anim.SetBool ("Movement", true);
 				SetState (charState.MOVEMENT);
@@ -242,7 +246,7 @@ public class MovementController : MonoBehaviour {
 
 		// Out of bounds
 		// Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
-		if(type == charType.SHEEP && state == charState.FLEEING){
+		if(state == charState.FLYING || state == charState.FLEEING){
 			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
 		}else{
 			gameObject.layer = LayerMask.NameToLayer("BlockedByInvis");

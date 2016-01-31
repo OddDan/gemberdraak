@@ -9,7 +9,7 @@ public class Swap : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 			a.AuraBurst(2);
 
-			if (other.gameObject.GetComponent<MovementController> ().state == charState.FLYING) {
+			if (other.gameObject.GetComponent<MovementController> ().state == charState.FLYING ) {
 				other.gameObject.GetComponent<MovementController> ().SetState (charState.FLEEING);
 				Camera.main.GetComponent<CameraZoom> ().RemoveFocus(other.gameObject.GetComponent<MovementController> ().playerID-1);
 
