@@ -7,6 +7,8 @@ public class MovementController : MonoBehaviour {
 	public float sheepSpeed = 9f;
 	public float sheepAcceleration = 35;
 
+	public float lightningRadius = 6f;
+
 	public Animator sheepAnim;
 	public Animator priestAnim;
 	public Animator anim;
@@ -78,6 +80,19 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
+	void LightningStrike(){
+		RaycastHit[] hits;
+		hits = Physics.SphereCastAll (transform.position, lightningRadius, Vector3.up, 1);
+		foreach (RaycastHit hit in hits) {
+			if (hit.transform.tag == "Player" && hit.transform.gameObject.GetComponent<MovementController> ().playerID != playerID && hit.transform.gameObject.GetComponent<MovementController> ().type != charType.SHEEP) {
+				hit.transform.gameObject.GetComponent<MovementController> ().SetState (charState.KNOCKBACK);
+				hit.transform.gameObject.GetComponent<MovementController> ().lastLookDir = transform.position - hit.transform.position;
+				hit.transform.gameObject.GetComponent<MovementController> ().verticalSpeed = 15;
+				hit.transform.gameObject.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
+			}
+		}
+	}
+
 	public void Mutate(int type){
 		if (type == 0) {
 			this.type = charType.PRIEST;
@@ -96,6 +111,7 @@ public class MovementController : MonoBehaviour {
 			sheepModel.SetActive (true);
 			body = sheepModel;
 			anim = sheepAnim;
+			LightningStrike ();
 		}
 	}
 		
@@ -201,6 +217,21 @@ public class MovementController : MonoBehaviour {
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
 			}
 			break;
+		case charState.KNOCKBACK:
+			stuntime += Time.deltaTime;
+
+			verticalSpeed -= gravity * Time.deltaTime;
+
+			velocity = lastLookDir.normalized * 10 * -1;
+			velocity.y = verticalSpeed;
+
+			controller.Move (velocity * Time.deltaTime);
+
+			if (controller.isGrounded) {
+				anim.SetBool ("Movement", true);
+				SetState (charState.MOVEMENT);
+			}
+			break;
 		default:
 			break;
 		}
@@ -265,5 +296,6 @@ public enum charState{
 	FLYING,
 	FLEEING,
 	ENTERING,
-	STUNNED
+	STUNNED,
+	KNOCKBACK
 }
