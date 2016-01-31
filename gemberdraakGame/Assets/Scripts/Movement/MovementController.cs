@@ -137,6 +137,7 @@ public class MovementController : MonoBehaviour {
 				verticalSpeed = 0;
 				if (Input.GetButtonDown ("CTRL" + playerID + "_jump") && type == charType.SHEEP) {
 					anim.SetTrigger ("Jump");
+					GetComponent<ActionController> ().pickup.Play ();
 					verticalSpeed = jumpSpeed;
 				}
 			} 

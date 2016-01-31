@@ -27,6 +27,7 @@ public class Projectile : MonoBehaviour {
 				other.gameObject.GetComponent<MovementController> ().stuntime = 0;
 				GetComponent<ParticleSystem> ().Stop ();
 				StartCoroutine (DestroyProjectile ());
+				GetComponent<AudioSource> ().Play ();
 			}
 		}
 		if (other.gameObject.tag == "Wall") {
