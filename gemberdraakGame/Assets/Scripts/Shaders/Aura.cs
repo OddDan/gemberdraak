@@ -23,7 +23,8 @@ public class Aura : MonoBehaviour
 	}
 
 	public void AuraBurst (float time)
-	{
+	{	
+		Debug.Log("BLO");
 		StopAllCoroutines ();
 		StartCoroutine (AuraBurstCoroutine (time));
 	}
@@ -34,14 +35,14 @@ public class Aura : MonoBehaviour
 
 		while (t < 1)
 		{
-			float value = (1 - Mathf.Sin (2 * Mathf.PI * t + Mathf.PI / 2)) / 2;
+			float value = (1 - Mathf.Sin (2 * Mathf.PI * t + Mathf.PI / 2)) / 6;
 
 			material.SetFloat ("_Opacity", Mathf.Lerp(material.GetFloat("_Opacity"), value, Time.deltaTime * 60));
 			material.SetFloat ("_Height", value + 0.1f);
 
 			t += Time.deltaTime / time;
 
-			yield return null;
+			yield return new WaitForEndOfFrame();
 		}
 
 		material.SetFloat ("_Height", 0.1f);
