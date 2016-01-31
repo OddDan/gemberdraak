@@ -9,22 +9,15 @@ public class GoreExploder : MonoBehaviour
 	{
 		children = GetComponentsInChildren<Rigidbody> ();
 
-
-	}
-
-	void Start ()
-	{
 		foreach (Rigidbody rigidbody in children)
 		{
-			//rigidbody.transform.position += Random.onUnitSphere * 0.2f;
+			//rigidbody.transform.position += Random.onUnitSphere * 0.05f;
+			rigidbody.transform.rotation = Random.rotation;
+
 			//rigidbody.AddExplosionForce (1000f,  transform.position, 1f);
 			rigidbody.AddForce(Random.onUnitSphere * 100);
 		}
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
+
+		Destroy (this);
 	}
 }
