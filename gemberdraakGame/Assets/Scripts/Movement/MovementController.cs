@@ -75,6 +75,11 @@ public class MovementController : MonoBehaviour {
 		}
 
 		if(isDemonLord && Input.GetButtonDown("Cancel")){
+			GameManager._GM.playerScores[0] = 0;
+			GameManager._GM.playerScores[1] = 0;
+			GameManager._GM.playerScores[2] = 0;
+			GameManager._GM.playerScores[3] = 0;
+			GameManager._GM.MutateAll ();
 			SceneManager.LoadScene(0);
 		}
 	}
@@ -148,6 +153,9 @@ public class MovementController : MonoBehaviour {
 		//switch == with states.
 
 		switch (state) {
+		case charState.IDLE:
+			transform.position = new Vector3 (0, -50, 0);
+			break;
 		case charState.MOVEMENT:
 			zSpeed = AccelerateTowards (zSpeed, acceleration, Input.GetAxis ("CTRL" + playerID + "_vertical") * movementSpeed);
 			xSpeed = AccelerateTowards (xSpeed, acceleration, Input.GetAxis ("CTRL" + playerID + "_horizontal") * movementSpeed);
@@ -192,6 +200,7 @@ public class MovementController : MonoBehaviour {
 
 			if (controller.isGrounded) {
 				carrying = false;
+				connectedPlayer = null;
 				if (state != charState.FLEEING) {
 					SetState (charState.MOVEMENT);
 					anim.SetBool ("Carrying", false);
@@ -228,6 +237,8 @@ public class MovementController : MonoBehaviour {
 			controller.Move (velocity * Time.deltaTime);
 			SetLookRotation (lastLookDir);
 			if (Vector3.Distance (transform.position, Vector3.zero) < 25) {
+				carrying = false;
+				connectedPlayer = null;
 				xSpeed = 0;
 				zSpeed = 0;
 				SetState (charState.MOVEMENT);
@@ -244,6 +255,7 @@ public class MovementController : MonoBehaviour {
 				anim.SetBool ("Carrying", false);
 				carrying = false;
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+				connectedPlayer = null;
 			}
 			break;
 		case charState.KNOCKBACK:
@@ -259,10 +271,13 @@ public class MovementController : MonoBehaviour {
 				anim.SetBool ("Carrying", false);
 				carrying = false;
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+				connectedPlayer = null;
 			}
 			if (controller.isGrounded) {
 				anim.SetBool ("Movement", true);
 				SetState (charState.MOVEMENT);
+				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+				connectedPlayer = null;
 			}
 			break;
 		default:
@@ -299,10 +314,11 @@ public class MovementController : MonoBehaviour {
 
 	public void Respawn(){
 		SetState (charState.ENTERING);
+		connectedPlayer = null;
+		carrying = false;
 		anim.SetBool ("Movement", true);
 		transform.position = GetSpawnPoint();
 		Camera.main.GetComponent<CameraZoom>().SetFocus(playerID-1, GameManager._GM.players[playerID-1]);
-		
 	}		
 
 	public void RemoveConnection(){

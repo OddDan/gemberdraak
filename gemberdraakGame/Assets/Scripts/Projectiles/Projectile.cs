@@ -27,6 +27,8 @@ public class Projectile : MonoBehaviour {
 		if (other.gameObject.tag == "Player" && !inactive) {
 			if (other.gameObject.GetComponent<MovementController>() != mc) {
 				if (other.gameObject.GetComponent<MovementController> ().type == charType.SHEEP && !other.gameObject.GetComponent<MovementController> ().isDemonLord) {
+					other.gameObject.GetComponent<MovementController> ().carrying = false;
+					other.gameObject.GetComponent<MovementController> ().connectedPlayer = null;
 					other.gameObject.GetComponent<MovementController> ().SetState (charState.STUNNED);
 				} else {
 					other.gameObject.GetComponent<MovementController> ().SetState (charState.KNOCKBACK);

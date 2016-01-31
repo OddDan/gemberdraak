@@ -20,14 +20,13 @@ public class GameManager : MonoBehaviour {
 		else if(_GM != this){
 			Destroy(gameObject);
 		}
+		MutateAll ();
 	}
 
-	// Use this for initialization
-	void Start () {
-		foreach (GameObject player  in players) {
-			player.GetComponent<MovementController> ().Mutate (0);
+	void OnLevelWasLoaded(int level){
+		if (level == 1) {
+			MutateAll ();
 		}
-		players[Random.Range (0, players.Length)].gameObject.GetComponent<MovementController>().Mutate(1);
 	}
 
 	public void ReleaseSoul(int playerID){
@@ -36,6 +35,21 @@ public class GameManager : MonoBehaviour {
 		soul.GetComponent<Soul>().ID = playerID;
 
 		Camera.main.GetComponent<CameraZoom>().SetFocus(playerID-1, soul);
+	}
+
+	public void MutateAll(){
+		players [0] = GameObject.Find ("Player (1)");
+		players [1] = GameObject.Find ("Player (2)");
+		players [2] = GameObject.Find ("Player (3)");
+		players [3] = GameObject.Find ("Player (4)");
+		soulStaches [0] = GameObject.Find ("Soul Stash 1");
+		soulStaches [1] = GameObject.Find ("Soul Stash 2");
+		soulStaches [2] = GameObject.Find ("Soul Stash 3");
+		soulStaches [3] = GameObject.Find ("Soul Stash 4");
+		foreach (GameObject player  in players) {
+			player.GetComponent<MovementController> ().Mutate (0);
+		}
+		players[Random.Range (0, players.Length)].gameObject.GetComponent<MovementController>().Mutate(1);
 	}
 
 }
