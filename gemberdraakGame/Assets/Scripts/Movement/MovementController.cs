@@ -206,7 +206,7 @@ public class MovementController : MonoBehaviour {
 
 		// Out of bounds
 		// Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
-		if(type == charType.SHEEP){
+		if(type == charType.SHEEP && state == charState.FLEEING){
 			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
 		}else{
 			gameObject.layer = LayerMask.NameToLayer("BlockedByInvis");
@@ -228,7 +228,7 @@ public class MovementController : MonoBehaviour {
 	}
 
 	public Vector3 GetSpawnPoint(){
-		Vector3 v = Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 25);
+		Vector3 v = GameManager._GM.soulStaches[playerID-1].transform.position * 0.8f; //Quaternion.Euler(0, Random.Range(0, 359), 0) * new Vector3(0, 0, 25);
 		return v;
 	}
 
@@ -236,6 +236,8 @@ public class MovementController : MonoBehaviour {
 		SetState (charState.ENTERING);
 		anim.SetBool ("Movement", true);
 		transform.position = GetSpawnPoint();
+		Camera.main.GetComponent<CameraZoom>().SetFocus(playerID-1, GameManager._GM.players[playerID-1]);
+		
 	}		
 
 	public void RemoveConnection(){
