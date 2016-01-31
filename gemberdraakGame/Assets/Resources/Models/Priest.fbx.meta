@@ -44,6 +44,7 @@ ModelImporter:
     100072: Priest
     100074: Priest_Rig
     100076: Cube.001
+    100078: Torus
     400000: polySurface19
     400002: //RootNode
     400004: Mask
@@ -83,19 +84,23 @@ ModelImporter:
     400072: Priest
     400074: Priest_Rig
     400076: Cube.001
+    400078: Torus
     2300000: polySurface19
     2300002: //RootNode
     2300004: Mask
     2300006: Cube.001
+    2300008: Torus
     3300000: polySurface19
     3300002: //RootNode
     3300004: Mask
     3300006: Cube.001
+    3300008: Torus
     4300000: Cube
     4300002: polySurface19
     4300004: Mask
     4300006: Priest
     4300008: Cube.001
+    4300010: Torus
     7400000: Priest_Rig|Priest_Idle
     7400002: Priest_Rig|Priest_Run
     7400004: Priest_Rig|PriestAction
