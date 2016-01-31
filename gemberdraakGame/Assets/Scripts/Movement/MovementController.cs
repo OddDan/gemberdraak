@@ -7,6 +7,8 @@ public class MovementController : MonoBehaviour {
 	public float sheepSpeed = 9f;
 	public float sheepAcceleration = 35;
 
+	public float lightningRadius = 6f;
+
 	public Animator sheepAnim;
 	public Animator priestAnim;
 	public Animator anim;
@@ -78,6 +80,22 @@ public class MovementController : MonoBehaviour {
 		}
 	}
 
+	void LightningStrike(){
+		RaycastHit[] hits;
+		hits = Physics.SphereCastAll (transform.position, lightningRadius, Vector3.up, 1);
+		foreach (RaycastHit hit in hits) {
+			Debug.Log (GameObject.Find ("Lightning").GetComponent<Lightning> ());
+			GameObject.Find ("Lightning").GetComponent<Lightning> ().CastLightning (transform.position);
+			if (hit.transform.tag == "Player" && hit.transform.gameObject.GetComponent<MovementController> ().playerID != playerID && hit.transform.gameObject.GetComponent<MovementController> ().type != charType.SHEEP) {
+				hit.transform.gameObject.GetComponent<MovementController> ().SetState (charState.KNOCKBACK);
+				hit.transform.gameObject.GetComponent<MovementController> ().lastLookDir = transform.position - hit.transform.position;
+				hit.transform.gameObject.GetComponent<MovementController> ().verticalSpeed = 15;
+				hit.transform.gameObject.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
+
+			}
+		}
+	}
+
 	public void Mutate(int type){
 		if (type == 0) {
 			this.type = charType.PRIEST;
@@ -96,6 +114,7 @@ public class MovementController : MonoBehaviour {
 			sheepModel.SetActive (true);
 			body = sheepModel;
 			anim = sheepAnim;
+			LightningStrike ();
 		}
 	}
 		
@@ -118,6 +137,7 @@ public class MovementController : MonoBehaviour {
 				verticalSpeed = 0;
 				if (Input.GetButtonDown ("CTRL" + playerID + "_jump") && type == charType.SHEEP) {
 					anim.SetTrigger ("Jump");
+					GetComponent<ActionController> ().pickup.Play ();
 					verticalSpeed = jumpSpeed;
 				}
 			} 
@@ -132,7 +152,8 @@ public class MovementController : MonoBehaviour {
 			
 			SetLookRotation (connectedPlayer.GetComponent<MovementController> ().body.transform.forward);
 			Vector3 targetPos = connectedPlayer.transform.position;
-			targetPos.y += 3.5f;
+			targetPos.y += 2.5f;
+			targetPos += connectedPlayer.GetComponent<MovementController> ().body.transform.forward * 0.7f;
 			transform.position = targetPos;
 
 			break;
@@ -200,13 +221,32 @@ public class MovementController : MonoBehaviour {
 				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
 			}
 			break;
+		case charState.KNOCKBACK:
+			stuntime += Time.deltaTime;
+
+			verticalSpeed -= gravity * Time.deltaTime;
+
+			velocity = lastLookDir.normalized * 10 * -1;
+			velocity.y = verticalSpeed;
+
+			controller.Move (velocity * Time.deltaTime);
+			if (carrying) {
+				anim.SetBool ("Carrying", false);
+				carrying = false;
+				connectedPlayer.GetComponent<MovementController> ().SetState (charState.FLYING);
+			}
+			if (controller.isGrounded) {
+				anim.SetBool ("Movement", true);
+				SetState (charState.MOVEMENT);
+			}
+			break;
 		default:
 			break;
 		}
 
 		// Out of bounds
 		// Vector2 v2 = new Vector2(transform.position.x, transform.position.z); 
-		if(type == charType.SHEEP && state == charState.FLEEING){
+		if(state == charState.FLYING || state == charState.FLEEING){
 			gameObject.layer = LayerMask.NameToLayer("NotBlockedByInvis");
 		}else{
 			gameObject.layer = LayerMask.NameToLayer("BlockedByInvis");
@@ -266,5 +306,6 @@ public enum charState{
 	FLYING,
 	FLEEING,
 	ENTERING,
-	STUNNED
+	STUNNED,
+	KNOCKBACK
 }

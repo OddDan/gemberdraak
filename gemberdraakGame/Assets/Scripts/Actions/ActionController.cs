@@ -101,7 +101,6 @@ public class ActionController : MonoBehaviour {
 		mc.connectedPlayer.GetComponent<MovementController> ().anim.SetBool ("Movement", false);
 		mc.connectedPlayer.GetComponent<MovementController> ().stuntime = 0;
 		mc.connectedPlayer.GetComponent<MovementController> ().connectedPlayer = null;
-		mc.connectedPlayer.GetComponent<MovementController> ().carrying = false;
 		mc.struggle = 0;
 	}
 
