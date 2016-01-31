@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MovementController : MonoBehaviour {
 	public float priestSpeed = 6.5f;
@@ -63,6 +64,10 @@ public class MovementController : MonoBehaviour {
 
 		if(isDemonLord && transform.position.y >= 0){
 			transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one * 4, Time.deltaTime);
+		}
+
+		if(isDemonLord && Input.GetButtonDown("Cancel")){
+			SceneManager.LoadScene(0);
 		}
 	}
 		
