@@ -10,7 +10,7 @@ public class SelectPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () { 
 		if (Input.GetButtonDown ("CTRL" + ID +"_jump")) {
-			ready = !ready;
+			ready = true;
 		}
 		if (ready) {
 			child.SetActive (true);
