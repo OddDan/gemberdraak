@@ -23,7 +23,7 @@ public class ActionController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_action") && mc.type == charType.PRIEST) {
+		if (Input.GetButtonDown ("CTRL" + mc.playerID + "_action")) {
 			if (mc.type == charType.PRIEST) {
 				if (!mc.carrying && mc.canMove) {
 					if (lastFireTime < Time.realtimeSinceStartup - cooldownTime) {
